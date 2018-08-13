@@ -1,0 +1,179 @@
+///// 1. TOOLING AND SET UP
+install node.js (to npm install node modules) 
+install Chrome React Developer Tools
+install cmder terminal
+install VSCode with Prettier and Simple React Snippets
+cd to working folder and npm install dependencies from package.json
+OR SO MUCH SIMPLER WITH:
+install create-react-app app-name
+npm start to boot app on local host (3000)
+index.js alert('hey') to validate
+
+///// Push new existing local project to GitHub:
+cd into project folder
+git init
+Create a remote, empty folder/repository on Github
+git remote add origin [GitHub repository web address]
+git push origin master
+
+
+///// 2. THINKING AND UNDERSTANDING REACT COMPONENTS
+Component: Reusable custom tags with props, state, context and render (spit HTML)
+
+///// 3. CREATING AND RENDERING FIRST COMPONENTS
+using es6 modules to import:
+
+import React from 'react';
+import { render } from 'react-dom';
+
+class ClassName extends React.Component {
+  render(){
+    return <p>Component</p>
+  }
+}
+
+export default ClassName
+
+render(<p>Render Check</p>, document.getElementById('main')); //renders Render Check
+
+Mount the component:
+render(<ClassName />, document.getElementById('main')); //renders Component
+
+Refactored to index.js and ClassName component:
+
+index.js:
+import React from 'react';
+import { render } from 'react-dom';
+import ClassName from './components/ClassName';
+
+render(<ClassName />, document.getElementById('main')); //renders Component
+
+ClassName.jsx:
+import React, { Component } from "react";
+
+class ClassName extends React.Component {
+  render(){
+    return <p>Component</p>
+  }
+}
+
+export default ClassName
+
+Simple React Snippets: imr imrc cc sfc ss ren
+
+///// 4. WRITING HTML WITH JSX
+<div className="class-name"></div>
+
+emmet shortcut: div.class-name outputs: <div className="class-name"></div>
+
+return ()
+
+no sibling elements: use <div></div> or <React.Fragment></React.Fragment> to wrap siblings
+{ } = JavaScript in JSX
+
+///// 5. LOADING CSS INTO OUR REACT APPLICATION
+Import in index.js:
+import "./css/style.css"; //import global css
+
+///// 6. CREATING OUR APPLICATION LAYOUT WITH COMPONENTS
+Create parent App component
+Simple React Snippets imrc cc ouputs:
+import React, { Component } from 'react';
+
+class App extends Component {
+  state = {  }
+  render() { 
+    return ( <p>I'm the parent App</p> );
+  }
+}
+ 
+export default App;
+
+Import than mount <App /> component in index.js
+import App from "./components/App";
+render(<App />, document.getElementById('main'));
+
+Create App scaffold and child components:
+<App/><Header/><Order/><Inventory>
+
+class App extends Component {
+  state = {};
+  render() {
+    return (
+      <div className="catch-of-the-day">
+        <div className="menu">
+          <Header tagline="Fresh Seafood Market" />
+        </div>
+        <Order />
+        <Inventory />
+      </div>
+    );
+  }
+}
+
+export default App;
+
+///// 7. PASSING DYNAMIC DATA WITH PROPS
+props is how you get data to a component (state = home, props = delivery vehicle)
+In App.js:
+<Header code="HTML" /> to move tagline value to Header props
+
+In Header.jsx:
+<h3>
+  <span>{this.props.code}</span>
+</h3>
+
+///// 8. STATELESS FUNCTIONAL COMPONENTS
+Components without state, used only to render JSX should be made into sfc (can have props)
+
+const Header = props => (
+  <p>I'm the Header {props.code}}</p>
+);
+
+PS: props can be destructured into ({code})
+
+///// 9. ROUTING WITH REACT ROUTER
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
