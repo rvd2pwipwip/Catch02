@@ -133,6 +133,13 @@ const Header = props => (
 PS: props can be destructured into ({code})
 
 ///// 9. ROUTING WITH REACT ROUTER
+1.create a component named Router.jsx (even router is a component in react)
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+2.stateless functional component Router with BrowserRouter, Switch and Route (one for each route)
+3.import router rendered components in Router.jsx
+4.import React from "react"; //needed because of JSX use, otherwise compile fails with 'React' must be in scope when using JSX
+<Route/> takes 2 params: 1=path, 2=component e.g. <Route path="/store/:storeId" component={App} />
 
 
 
