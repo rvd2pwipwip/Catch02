@@ -141,9 +141,21 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 4.import React from "react"; //needed because of JSX use, otherwise compile fails with 'React' must be in scope when using JSX
 <Route/> takes 2 params: 1=path, 2=component e.g. <Route path="/store/:storeId" component={App} />
 
+///// 10. HELPER AND UTILITY FUNCTIONS
+import helper functions withes6 module syntax:
+import { helperFunction } from "../helpers";
 
-
-
+///// 11. EVENTS, REFS AND THIS BINDING
+1.create a ref property in the StorePicker class to access the <input/> element:
+myInput = React.createRef();
+2.add the ref property to the input element:
+<input
+  ref={this.myInput}
+  ...
+/>
+3.set onSubmit event on <form/> element (not onClick on <button/>!)
+4.create onSubmit handler function AS A PROPERTY WITH ARROW FUNCTION to have this binding to StorePicker:
+  handleEvent = e => {};
 
 
 
