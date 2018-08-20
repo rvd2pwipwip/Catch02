@@ -157,6 +157,24 @@ myInput = React.createRef();
 4.create onSubmit handler function AS A PROPERTY WITH ARROW FUNCTION to have this binding to StorePicker:
   handleEvent = e => {};
 
+///// 12. HANDLING EVENTS
+No page refresh: change url with push state through react Router
+The Router component is the parent of StorePicker (and all its imported for render components)
+Router has props.history with push method so it is available to StorePicker:
+
+goToStore = e => {
+  e.preventDefault(); //stop the form from submitting
+  const storeName = this.myInput.value.value; //get the text from the input (with a ref)
+  this.props.history.push(`/store/${storeName}`); //change page to /store/:captured_input
+};
+
+///// 13. UNDERSTANDING STATE
+State is an object that holds data. 
+When the data in app state changes, React updates it everywhere it is used.
+
+Create a form to add fish.
+When form submits, it turns all inputs in property/value of fish object (with ref).
+
 
 
 
