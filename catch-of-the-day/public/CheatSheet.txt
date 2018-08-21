@@ -1,4 +1,4 @@
-///// 1. TOOLING AND SET UP
+///// 1. TOOLING AND SET UP /////
 install node.js (to npm install node modules) 
 install Chrome React Developer Tools
 install cmder terminal
@@ -17,10 +17,10 @@ git remote add origin [GitHub repository web address]
 git push origin master
 
 
-///// 2. THINKING AND UNDERSTANDING REACT COMPONENTS
+///// 2. THINKING AND UNDERSTANDING REACT COMPONENTS /////
 Component: Reusable custom tags with props, state, context and render (spit HTML)
 
-///// 3. CREATING AND RENDERING FIRST COMPONENTS
+///// 3. CREATING AND RENDERING FIRST COMPONENTS /////
 using es6 modules to import:
 
 import React from 'react';
@@ -61,7 +61,7 @@ export default ClassName
 
 Simple React Snippets: imr imrc cc sfc ss ren
 
-///// 4. WRITING HTML WITH JSX
+///// 4. WRITING HTML WITH JSX /////
 <div className="class-name"></div>
 
 emmet shortcut: div.class-name outputs: <div className="class-name"></div>
@@ -71,11 +71,11 @@ return ()
 no sibling elements: use <div></div> or <React.Fragment></React.Fragment> to wrap siblings
 { } = JavaScript in JSX
 
-///// 5. LOADING CSS INTO OUR REACT APPLICATION
+///// 5. LOADING CSS INTO OUR REACT APPLICATION /////
 Import in index.js:
 import "./css/style.css"; //import global css
 
-///// 6. CREATING OUR APPLICATION LAYOUT WITH COMPONENTS
+///// 6. CREATING OUR APPLICATION LAYOUT WITH COMPONENTS /////
 Create parent App component
 Simple React Snippets imrc cc ouputs:
 import React, { Component } from 'react';
@@ -113,7 +113,7 @@ class App extends Component {
 
 export default App;
 
-///// 7. PASSING DYNAMIC DATA WITH PROPS
+///// 7. PASSING DYNAMIC DATA WITH PROPS /////
 props is how you get data to a component (state = home, props = delivery vehicle)
 In App.js:
 <Header code="HTML" /> to move tagline value to Header props
@@ -123,7 +123,7 @@ In Header.jsx:
   <span>{this.props.code}</span>
 </h3>
 
-///// 8. STATELESS FUNCTIONAL COMPONENTS
+///// 8. STATELESS FUNCTIONAL COMPONENTS /////
 Components without state, used only to render JSX should be made into sfc (can have props)
 
 const Header = props => (
@@ -132,7 +132,7 @@ const Header = props => (
 
 PS: props can be destructured into ({code})
 
-///// 9. ROUTING WITH REACT ROUTER
+///// 9. ROUTING WITH REACT ROUTER /////
 1.create a component named Router.jsx (even router is a component in react)
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
@@ -141,11 +141,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 4.import React from "react"; //needed because of JSX use, otherwise compile fails with 'React' must be in scope when using JSX
 <Route/> takes 2 params: 1=path, 2=component e.g. <Route path="/store/:storeId" component={App} />
 
-///// 10. HELPER AND UTILITY FUNCTIONS
+///// 10. HELPER AND UTILITY FUNCTIONS /////
 import helper functions withes6 module syntax:
 import { helperFunction } from "../helpers";
 
-///// 11. EVENTS, REFS AND THIS BINDING
+///// 11. EVENTS, REFS AND THIS BINDING /////
 1.create a ref property in the StorePicker class to access the <input/> element:
 myInput = React.createRef();
 2.add the ref property to the input element:
@@ -157,7 +157,7 @@ myInput = React.createRef();
 4.create onSubmit handler function AS A PROPERTY WITH ARROW FUNCTION to have this binding to StorePicker:
   handleEvent = e => {};
 
-///// 12. HANDLING EVENTS
+///// 12. HANDLING EVENTS /////
 No page refresh: change url with push state through react Router
 The Router component is the parent of StorePicker (and all its imported for render components)
 Router has props.history with push method so it is available to StorePicker:
@@ -168,7 +168,7 @@ goToStore = e => {
   this.props.history.push(`/store/${storeName}`); //change page to /store/:captured_input
 };
 
-///// 13. UNDERSTANDING STATE
+///// 13. UNDERSTANDING STATE /////
 State is an object that holds data. 
 When the data in app state changes, React updates it everywhere it is used.
 
@@ -203,6 +203,47 @@ addFish = fish => {
 
 6.Reset form of AddFishForm's event handler after fish is added
 e.currentTarget.reset();
+
+///// 14. LOADING DATA INTO STATE ONCLICK /////
+Load sample fish data into app with load sample button
+
+1.Inside App component, create loadSampleFishes method and set it as a property of <Inventory />
+2.Add a Load Sample Fishes button below the form in the Inventory component.
+3.Set the button's onClick property to props.loadSampleFishes:
+<button onClick={this.props.loadSampleFishes}>
+  Load Sample Fishes
+</button>
+4.sample-fishes.js has a fishes object exported as default (export default fishes)
+5.Import sample fishes into App component:
+import sampleFishes from "../sample-fishes";
+6.Update state with sampleFishes through setState api:
+loadSampleFishes = () => {
+  this.setState({ fishes: sampleFishes });
+};
+
+///// 15. DISPLAYING STATE WITH JSX /////
+1.Inside App component, create a <ul/> with a class of fishes under the <Header/>
+2.Create new Fish component and import it in App:
+import React, { Component } from "react";
+
+class Fish extends Component {
+  render() {
+    return <div className="single-fish">Fish</div>;
+  }
+}
+
+export default Fish;
+3.Transform state fishes to array to map it:
+Object.keys(this.state.fishes)
+4.map over the array to render a <Fish /> component for each fish:
+Object.keys(this.state.fishes).map(fish => <Fish />
+5.Create a key property for each mapped <Fish /> component:
+Object.keys(this.state.fishes).map(fish => <Fish key={fish} />
+6.Create a details property for each mapped <Fish /> component:
+Object.keys(this.state.fishes).map(fish => <Fish key={fish} details='' />
+7.Assign details property with each state fish data:
+Object.keys(this.state.fishes).map(fish => <Fish key={fish} details={this.state.fishes[fish]} />
+
 
 
 
