@@ -172,8 +172,38 @@ goToStore = e => {
 State is an object that holds data. 
 When the data in app state changes, React updates it everywhere it is used.
 
-Create a form to add fish.
-When form submits, it turns all inputs in property/value of fish object (with ref).
+Create a form to add fish (name, price, status, description and image inputs).
+When form submits, it turns all inputs in property/value of new fish object (with refs).
+Pass fish onject to App state:
+1. Inside App component, create state property containing empty fishes and order objects
+state = {
+  fishes: {},
+  order: {}
+};
+2.Inside App component, create addFish method that takes in a fish to setState() api
+3.Inside App component, set addFish property of <Inventory> to this.addFish
+<Inventory addFish={this.addFish} />
+4.Inside Inventory component, set addFish property of <AddFishForm> to this.props.addFish
+<AddFishForm addFish={this.props.addFish} />
+
+5.STATE UPDATE THROUGH SETSTATE API
+I.Copy existing state (no mutation: never reach directly into state to modify it)
+  using spread operator
+II.Add new fish object to previously copied state (with spread operator)
+III.Set new fishes object to state fishes with setState()
+
+addFish = fish => {
+  //1.copy existing state
+  const fishes = { ...this.state.fishes };
+  //2.add new fish object to fishes object (bracket notation and date key)
+  fishes[`fish${Date.now()}`] = fish;
+  //3.set new fishes object to state
+  this.setState({ fishes });
+};
+
+6.Reset form of AddFishForm's event handler after fish is added
+e.currentTarget.reset();
+
 
 
 

@@ -2,22 +2,25 @@ import React, { Component } from "react";
 
 class AddFishForm extends Component {
   state = {};
+  //create refs to access input elements
   nameRef = React.createRef();
   priceRef = React.createRef();
   statusRef = React.createRef();
   descRef = React.createRef();
   imageRef = React.createRef();
-
+  //turn all inputs in property/value of fish object
   createFish = e => {
     e.preventDefault();
     const fish = {
       name: this.nameRef.value.value,
-      price: this.priceRef.value.value,
-      status: this.statusRef.value.value,
+      price: parseFloat(this.priceRef.value.value),
+      status: Boolean(this.statusRef.value.value),
       desc: this.descRef.value.value,
       image: this.imageRef.value.value
     };
-    console.log(fish);
+    this.props.addFish(fish);
+    //reset form
+    e.currentTarget.reset();
   };
 
   render() {
