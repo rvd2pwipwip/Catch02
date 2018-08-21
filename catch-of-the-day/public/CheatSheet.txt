@@ -233,6 +233,7 @@ class Fish extends Component {
 }
 
 export default Fish;
+
 3.Transform state fishes to array to map it:
 Object.keys(this.state.fishes)
 4.map over the array to render a <Fish /> component for each fish:
@@ -243,6 +244,7 @@ Object.keys(this.state.fishes).map(fish => <Fish key={fish} />
 Object.keys(this.state.fishes).map(fish => <Fish key={fish} details='' />
 7.Assign details property with each state fish data:
 Object.keys(this.state.fishes).map(fish => <Fish key={fish} details={this.state.fishes[fish]} />
+8.Format Fish component to display fish data from {this.props.details}
 
 
 
