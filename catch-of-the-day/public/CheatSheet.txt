@@ -247,7 +247,7 @@ Object.keys(this.state.fishes).map(fish => <Fish key={fish} details={this.state.
 8.Format Fish component to display fish data from {this.props.details}
 
 ///// 16. UPDATING OUR ORDER STATE /////
-1.create a const isAvailable and set it as the disabled property of Add to Order <button />:
+1.in Fish component, create a const isAvailable and set it as the disabled property of Add to Order <button />:
 const isAvailable = status === "available";
 <button disabled={!isAvailable}>
   Add to Order
@@ -256,7 +256,24 @@ const isAvailable = status === "available";
 <button disabled={!isAvailable}>
   {isAvailable ? "Add to Order" : "Sold Out!"}
 </button>
-
+3.in App component, create addToOrder property that is a () => {} that will be passed the key argument
+addToOrder = fish => {
+  //1.take a copy of the state
+  const order = { ...this.state.order };
+  //2.either add to or update the number of order
+  order[fish] = order[fish] + 1 || 1;
+  //3.setState to update
+  this.setState({ order });
+};
+4.in order to access a component's key it has to be set to another property of the component:
+<Fish
+  key={fish}
+  fish={fish}
+  details={this.state.fishes[fish]}
+  addToOrder={this.addToOrder}
+/>
+5.in fish component, create onClick property that calls an arrow function that returns the addToOrder with the fish argument:
+onClick={() => this.props.addToOrder(this.props.fish)}
 
 
 
