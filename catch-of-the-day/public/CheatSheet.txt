@@ -275,7 +275,33 @@ addToOrder = fish => {
 5.in fish component, create onClick property that calls an arrow function that returns the addToOrder with the fish argument:
 onClick={() => this.props.addToOrder(this.props.fish)}
 
-
+///// 17. DISPLAYING ORDER STATE WITH JSX /////
+1.pass App state.fisges and state.order to Order component via property:
+<Order fishes={this.state.fishes} order={this.state.order} />
+or use es6 object spread to do the same (pass ALL state objects):
+<Order {...this.state} />
+2.transform Order props.order object into array to map it:
+3.calculate total with reduce:
+const total = orderIds.reduce((prevTotal, key) => {
+  const fish = this.props.fishes[key];
+  const count = this.props.order[key];
+  const isAvailable = fish && fish.status === "available";
+  if (isAvailable) {
+    return prevTotal + count * fish.price;
+  }
+  return prevTotal;
+}, 0);
+4.render total in Order component:
+<div className="total">
+  Total:
+  <strong>{` ${formatPrice(total)}`}</strong>
+</div>
+5.loop over orderIds to display each fish with its qty inside a <ul/>:
+<ul>
+  {orderIds.map(key => (
+    <li>{key}</li>
+  ))}
+</ul>
 
 
 
