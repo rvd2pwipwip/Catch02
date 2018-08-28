@@ -302,9 +302,30 @@ const total = orderIds.reduce((prevTotal, key) => {
     <li>{key}</li>
   ))}
 </ul>
+the <li/> element above will get complex to display quantity, name and price
+a separate "render" property as arrow function should be created instead:
+renderOrder = key => {
+  const fish = this.props.fishes[key];
+  const count = this.props.order[key];
+  const isAvailable = fish && fish.status === "available";
+  if (isAvailable) {
+    return (
+      <li key={key}> //each element must have a unique key as a unique identifier
+        {`${count} lbs ${fish ? fish.name : "fish"} 
+        ${formatPrice(count * fish.price)}`}
+      </li>
+    );
+  }
+  return (
+    <li key={key}>{`Sorry, ${
+      fish.name ? fish.name : "fish"
+    } is no longer available`}</li>
+  );
+};
+the renderOrder function is called in the orderIds map:
+<ul className="order">{orderIds.map(this.renderOrder)}</ul>
 
-
-
+///// 18. PERSISTING OUR STATE WITH FIREBASE /////
 
 
 

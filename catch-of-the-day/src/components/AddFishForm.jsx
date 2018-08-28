@@ -14,7 +14,7 @@ class AddFishForm extends Component {
     const fish = {
       name: this.nameRef.value.value,
       price: parseFloat(this.priceRef.value.value),
-      status: Boolean(this.statusRef.value.value),
+      status: this.statusRef.value.value,
       desc: this.descRef.value.value,
       image: this.imageRef.value.value
     };
@@ -28,6 +28,7 @@ class AddFishForm extends Component {
       <form className="fish-edit" onSubmit={this.createFish}>
         <input name="name" ref={this.nameRef} type="text" placeholder="NAME" />
         <input
+          required
           name="price"
           ref={this.priceRef}
           type="text"
