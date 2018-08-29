@@ -326,6 +326,42 @@ the renderOrder function is called in the orderIds map:
 <ul className="order">{orderIds.map(this.renderOrder)}</ul>
 
 ///// 18. PERSISTING OUR STATE WITH FIREBASE /////
+1.create base.js file in src folder (this is not a component)
+2.import Rebase to allow state mirror to Firebase
+3.import official Firebase package  for everything but mirroring
+4.configure app:
+in Firebase, create a project, set its rules no security (temporary):
+".read": true,
+".write": true
+in Project Overview, select Add Firebase to your web app
+5.copy the content of the config object and paste it in base.js:
+const firebaseApp = firebase.initializeApp({
+  apiKey: "AIzaSyCv64oaoyh1-nRbGSnQpW28kdV-9IWTb6g",
+  authDomain: "catch-of-the-day-rvd3.firebaseapp.com",
+  databaseURL: "https://catch-of-the-day-rvd3.firebaseio.com"
+});
+6.create rebase binding:
+const base = Rebase.createClass(firebaseApp.database()); //rebase binding
+7.export both the firebase app and its rebase binding:
+//named export:
+export { firebaseApp };
+
+//default export:
+export default base;
+8.back in App.jsx, mirror App state to Firebase after component is loaded:
+componentDidMount() {
+  const { params } = this.props.match;
+  //only sync storeName/fishes in firebase
+  this.ref = base.syncState(`${params.storeId}/fishes`, {
+    context: this,
+    state: "fishes"
+  }); //not same ref as react refs
+}
+9.load app: Firebase database is still empty
+10.load sample fishes: Firebase database is synced with state fishes
+
+
+
 
 
 
