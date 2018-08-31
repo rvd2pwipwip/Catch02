@@ -358,11 +358,30 @@ componentDidMount() {
   }); //not same ref as react refs
 }
 9.load app: Firebase database is still empty
-10.load sample fishes: Firebase database is synced with state fishes
+10.load sample fishes: Firebase database is now synced with state fishes
 11.stop listening for changes when App.jsx is unmounted:
 componentWillUnmount() {
   base.removeBinding(this.ref);
 }
+
+///// 19. PERSISTING ORDER STATE WITH LOCALSTORAGE /////
+1.update localStorage every time the state is updated in componentDidUpdate with setItem
+ (the order object must be converted to a string as the 2nd argument of setItem):
+componentDidUpdate() {
+  const { params } = this.props.match;
+  //key:value = storeName:order
+  localStorage.setItem(params.storeId, JSON.stringify(this.state.order));
+}
+2.reinstate localStorage in componentDidMount to load order when page is reloaded
+  (the order string from localStorage must be parsed as an object):
+const localStorageRef = localStorage.getItem(params.storeId);
+if (localStorageRef) {
+  this.setState({ order: JSON.parse(localStorageRef) });
+}
+3.inside of Order render method, make sure fish is loaded from firebase before continuing
+  if (!fish) return null;
+
+///// 20. BI-DIRECTIONAL DATA FLOW AND LIVE STATE EDITING /////
 
 
 

@@ -14,11 +14,21 @@ class App extends Component {
   //listen for changes
   componentDidMount() {
     const { params } = this.props.match;
+    //reinstate our localStorage
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
     //only sync storeName/fishes in firebase
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
       state: "fishes"
     }); //not same ref as react refs
+  }
+  componentDidUpdate() {
+    const { params } = this.props.match;
+    //key:value = storeName:order
+    localStorage.setItem(params.storeId, JSON.stringify(this.state.order));
   }
   //stop listening for changes
   componentWillUnmount() {
